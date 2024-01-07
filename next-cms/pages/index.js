@@ -1,6 +1,6 @@
 import Course from "@/components/templates/index/Course";
 import coursesModel from "@/models/course";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/utils/db.js";
 
 const index = () => {
   return <Course />;
@@ -8,7 +8,7 @@ const index = () => {
 
 export async function getStaticProps(context) {
   connectToDB();
-  const courses = await coursesModel.find({});
+  const courses = await coursesModel.find();
 
   console.log(courses);
 

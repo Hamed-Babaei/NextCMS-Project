@@ -7,6 +7,6 @@ const schema = mongoose.Schema({
   },
 });
 
-const model = mongoose.model("Course", schema);
+const model = mongoose.models.Course || mongoose.models("Course", schema);
 
 export default model;

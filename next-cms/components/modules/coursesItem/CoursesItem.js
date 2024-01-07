@@ -26,16 +26,14 @@ const CoursesItem = ({ title, image }) => {
             className={styles.courses_btn_edit}
             onClick={() => setShowEditModal(true)}
           >
-            {" "}
-            ویرایش{" "}
+            ویرایش
           </a>
           <a
             href="#"
             className={styles.courses_btn_delete}
             onClick={() => setShowDeleteModal(true)}
           >
-            {" "}
-            حذف{" "}
+            حذف
           </a>
         </div>
       </li>

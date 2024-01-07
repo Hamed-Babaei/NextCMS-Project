@@ -9,10 +9,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar_search}>
-        <input
-          type="text"
-          placeholder="جستجو کنید...."
-        />
+        <input type="text" placeholder="جستجو کنید...." />
         <span className={styles.navbar_search_icon}>
           <FontAwesomeIcon icon={faSearch} />
         </span>
@@ -21,7 +18,7 @@ const Navbar = () => {
         <img src="/images/avatar/avatar.png" alt="" />
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
