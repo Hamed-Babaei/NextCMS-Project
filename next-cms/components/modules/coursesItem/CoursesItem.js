@@ -2,12 +2,24 @@ import DeleteModal from "@/components/templates/index/DeleteModal";
 import EditModal from "@/components/templates/index/EditModal";
 import { useState } from "react";
 import styles from "@/styles/Course.module.css";
-const CoursesItem = ({ title, image }) => {
+const CoursesItem = ({ title, image, _id }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const hideEditModal = () => setShowEditModal(false);
+
   const hideDeleteModal = () => setShowDeleteModal(false);
+
+  const removeCourse = async (e) => {
+    e.preventDefault();
+    setShowDeleteModal(true);
+    console.log("id in course item", _id);
+    const res = await fetch(`/api/courses/${_id}`);
+
+    if (res.status === 200) {
+      setShowDeleteModal(false);
+    }
+  };
 
   return (
     <>
@@ -26,21 +38,24 @@ const CoursesItem = ({ title, image }) => {
             className={styles.courses_btn_edit}
             onClick={() => setShowEditModal(true)}
           >
-            {" "}
-            ویرایش{" "}
+            ویرایش
           </a>
           <a
             href="#"
             className={styles.courses_btn_delete}
             onClick={() => setShowDeleteModal(true)}
           >
-            {" "}
-            حذف{" "}
+            حذف
           </a>
         </div>
       </li>
       {showEditModal && <EditModal hideEditModal={hideEditModal} />}
-      {showDeleteModal && <DeleteModal hideDeleteModal={hideDeleteModal} />}
+      {showDeleteModal && (
+        <DeleteModal
+          removeCourse={removeCourse}
+          hideDeleteModal={hideDeleteModal}
+        />
+      )}
     </>
   );
 };

@@ -30,6 +30,8 @@ const handler = async (req, res) => {
           .json({ message: "UnKnown internal server error !!" });
       }
       break;
+
+    // ? Default Case
     default:
       return res.status(405).end("Method Not Allowed");
       break;

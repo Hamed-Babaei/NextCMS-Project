@@ -40,6 +40,7 @@ const Course = ({ courses }) => {
               key={course._id}
               title={course.title}
               image="/images/courses/PWA.jpg"
+              {...course}
             />
           ))}
         </ul>
