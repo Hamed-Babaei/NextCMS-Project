@@ -13,7 +13,9 @@ export async function getStaticProps(context) {
   console.log(courses);
 
   return {
-    props: {},
+    props: {
+      courses,
+    },
   };
 }
 
