@@ -3,10 +3,23 @@ import { useState } from "react";
 import AddCourseModal from "./AddCourseModal";
 import styles from "@/styles/Course.module.css";
 
-const Course = () => {
+const Course = ({ courses }) => {
+  console.log("course in courses page", courses);
+
+  const [data, setData] = useState([...courses]);
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
 
   const hideAddCourseModal = () => setShowAddCourseModal(false);
+
+  const getCourses = async () => {
+    console.log("get course");
+    const res = await fetch("/api/courses");
+    const coursesData = await res.json();
+
+    if (res.status === 200) {
+      setData(coursesData);
+    }
+  };
 
   return (
     <>
@@ -22,16 +35,21 @@ const Course = () => {
           </a>
         </div>
         <ul className={styles.courses_list}>
-          <CoursesItem title="دوره PWA" image="/images/courses/PWA.jpg" />
-          <CoursesItem
-            title="دوره جاوا اسکریپت"
-            image="/images/courses/js.png"
-          />
+          {data.map((course) => (
+            <CoursesItem
+              key={course._id}
+              title={course.title}
+              image="/images/courses/PWA.jpg"
+            />
+          ))}
         </ul>
       </section>
 
       {showAddCourseModal && (
-        <AddCourseModal hideAddCourseModal={hideAddCourseModal} />
+        <AddCourseModal
+          getCourses={getCourses}
+          hideAddCourseModal={hideAddCourseModal}
+        />
       )}
     </>
   );

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { default: mongoose } = require("mongoose");
 
 const connectToDB = async () => {
   try {
@@ -6,10 +6,10 @@ const connectToDB = async () => {
       return false;
     } else {
       await mongoose.connect("mongodb://127.0.0.1:27017/next-cms");
-      console.log("Database connected successfully!");
+      console.log("Connect To DB Successfully :))");
     }
-  } catch (error) {
-    console.log("Database Connection error =>", error);
+  } catch (err) {
+    console.log("DataBase Connection Error =>", err);
   }
 };
 

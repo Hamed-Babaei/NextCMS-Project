@@ -1,4 +1,5 @@
 const handler = (req, res) => {
-  res.status(200).json({ name: "Welcome to CMS API Home page :))" });
+  res.json({ message: "Welcome to cms apis home page :))" });
 };
+
 export default handler;
