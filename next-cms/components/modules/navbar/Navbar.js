@@ -16,6 +16,10 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    setSearch(router.query.q);
+  }, []);
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar_search}>
