@@ -3,11 +3,18 @@ import connectToDB from "@/utils/db";
 
 const handler = async (req, res) => {
   connectToDB();
+
   switch (req.method) {
     case "GET":
       try {
-        const courses = await coursesModel.find();
-        return res.status(200).json(courses);
+        if (req.query.q) {
+          const { q } = req.query;
+          const courses = await coursesModel.find({ title: { $regex: q } });
+          return res.json(courses);
+        } else {
+          const courses = await coursesModel.find({});
+          return res.status(200).json(courses);
+        }
       } catch (err) {
         return res
           .status(500)

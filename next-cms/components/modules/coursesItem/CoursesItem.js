@@ -2,7 +2,7 @@ import DeleteModal from "@/components/templates/index/DeleteModal";
 import EditModal from "@/components/templates/index/EditModal";
 import { useState } from "react";
 import styles from "@/styles/Course.module.css";
-const CoursesItem = ({ title, image, _id }) => {
+const CoursesItem = ({ title, image, _id, getCourses }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -20,6 +20,24 @@ const CoursesItem = ({ title, image, _id }) => {
 
     if (res.status === 200) {
       setShowDeleteModal(false);
+      getCourses();
+    }
+  };
+
+  const updateCourse = async (e, title) => {
+    e.preventDefault();
+
+    const res = await fetch(`/api/courses/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title }),
+    });
+
+    if (res.status === 200) {
+      setShowEditModal(false);
+      getCourses();
     }
   };
 
@@ -51,7 +69,9 @@ const CoursesItem = ({ title, image, _id }) => {
           </a>
         </div>
       </li>
-      {showEditModal && <EditModal hideEditModal={hideEditModal} />}
+      {showEditModal && (
+        <EditModal updateCourse={updateCourse} hideEditModal={hideEditModal} />
+      )}
       {showDeleteModal && (
         <DeleteModal
           removeCourse={removeCourse}

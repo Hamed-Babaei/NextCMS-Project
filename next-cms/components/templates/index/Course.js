@@ -41,6 +41,7 @@ const Course = ({ courses }) => {
               title={course.title}
               image="/images/courses/PWA.jpg"
               {...course}
+              getCourses={getCourses}
             />
           ))}
         </ul>
