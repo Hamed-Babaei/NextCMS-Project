@@ -14,7 +14,9 @@ const CoursesItem = ({ title, image, _id }) => {
     e.preventDefault();
     setShowDeleteModal(true);
     console.log("id in course item", _id);
-    const res = await fetch(`/api/courses/${_id}`);
+    const res = await fetch(`/api/courses/${_id}`, {
+      method: "DELETE",
+    });
 
     if (res.status === 200) {
       setShowDeleteModal(false);
